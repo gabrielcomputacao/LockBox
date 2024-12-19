@@ -2,7 +2,6 @@
 
 
 
-require 'Validation.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -45,5 +44,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
 
-header("location: /login");
+view("register");
 exit();

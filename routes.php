@@ -13,11 +13,13 @@ if (isset($urlParts['query'])) {
 }
 
 
+
+
 if (
-    isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] !== '/lockbox'
+    (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] != '/lockbox/')
     || isset($queryParams['id'])
 ) {
-    $uri = str_replace('/lockbox', '', $_SERVER['REQUEST_URI']);
+    $uri = str_replace('/', '', $_SERVER['REQUEST_URI']);
 
     if (isset($queryParams['id']) || isset($queryParams['msg'])) {
 
@@ -29,6 +31,7 @@ if (
         $controller = $uri;
     }
 }
+
 
 
 
