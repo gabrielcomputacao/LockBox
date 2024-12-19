@@ -24,7 +24,7 @@ class Validation
                 } else if ($rule == 'unique') {
                     $validationFields->$rule('usuarios', $field, $data[$field]);
                 } else {
-                    var_dump($field);
+
                     $validationFields->$rule($field, $data[$field]);
                 }
             }
@@ -33,12 +33,17 @@ class Validation
         return $validationFields;
     }
 
+    private function addError($field, $err)
+    {
+
+        $this->validations[$field][] = $err;
+    }
 
     private function required($field, $value)
     {
 
         if (strlen($value) == 0) {
-            $this->validations[] = "The $field is required";
+            $this->addError($field, "The $field is required");
         }
     }
 
@@ -46,14 +51,14 @@ class Validation
     private function email($field, $value)
     {
         if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            $this->validations[] = 'invalid email';
+            $this->addError($field, 'invalid email');
         }
     }
 
     private function confirmed($field, $confirmedField)
     {
         if ($field != $confirmedField) {
-            $this->validations[] = 'Confirmation email is different';
+            $this->addError($field, 'Confirmation email is different');
         }
     }
 
@@ -61,14 +66,14 @@ class Validation
     {
         echo $value;
         if (strlen($value) < $min) {
-            $this->validations[] = "The $field must have $min character";
+            $this->addError($field, "The $field must have $min character");
         }
     }
 
     private function strong($specialCharacter, $field, $value)
     {
         if (! strpbrk($value, $specialCharacter)) {
-            $this->validations[] = "The $field must is strong";
+            $this->addError($field, "The $field must is strong");
         }
     }
 
@@ -89,9 +94,11 @@ class Validation
         )->fetch();
 
         if ($result) {
-            $this->validations[] = "The email is used";
+            $this->addError($field, "The email is used");
         }
     }
+
+
 
     public function notPass()
     {

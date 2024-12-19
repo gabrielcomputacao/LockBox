@@ -15,6 +15,9 @@
     <div class="bg-white min-h-screen hero mr-40 text-black">
         <div class="hero-content -mt-20">
             <form action="/login" method="post">
+
+                <?php $validationsLogin = flash()->get('validation') ?>
+
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
@@ -25,19 +28,27 @@
                                 <span class="label-text text-black">Email</span>
 
                             </div>
-                            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
-
+                            <input name="email" type="text" placeholder="" class="input input-bordered w-full max-w-xs bg-white" />
+                            <?php if (isset($validationsLogin['email'])): ?>
+                                <div class="label text-xs text-error">
+                                    <?= $validationsLogin['email'][0] ?>
+                                </div>
+                            <?php endif; ?>
                         </label>
                         <label class="form-control ">
                             <div class="label">
                                 <span class="label-text text-black">Password</span>
 
                             </div>
-                            <input type="password" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
-
+                            <input name="password" type="password" class="input input-bordered w-full max-w-xs bg-white" />
+                            <?php if (isset($validationsLogin['password'])): ?>
+                                <div class="label text-xs text-error">
+                                    <?= $validationsLogin['password'][0] ?>
+                                </div>
+                            <?php endif; ?>
                         </label>
                         <div class="card-actions justify-end">
-                            <button class="btn btn-primary btn-block">Logar</button>
+                            <button type="submit" class="btn btn-primary btn-block">Logar</button>
                             <a href="/register" class="btn btn-link">Register</a>
                         </div>
                     </div>

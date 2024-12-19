@@ -25,7 +25,7 @@
                                 <span class="label-text text-black">Nome</span>
 
                             </div>
-                            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
+                            <input name="name" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
 
                         </label>
                         <label class="form-control ">
@@ -33,7 +33,7 @@
                                 <span class="label-text text-black">Email</span>
 
                             </div>
-                            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
+                            <input name="email" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
 
                         </label>
                         <label class="form-control ">
@@ -41,7 +41,7 @@
                                 <span class="label-text text-black">Confirm Email</span>
 
                             </div>
-                            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
+                            <input type="text" name="confirmemail" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
 
                         </label>
                         <label class="form-control ">
@@ -49,12 +49,12 @@
                                 <span class="label-text text-black">Password</span>
 
                             </div>
-                            <input type="password" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
+                            <input name="password" type="password" placeholder="Type here" class="input input-bordered w-full max-w-xs bg-white" />
 
                         </label>
                         <div class="card-actions justify-end">
                             <button class="btn btn-primary btn-block">Register</button>
-                            <a href="/register" class="btn btn-link">already have account</a>
+                            <a href="/login" class="btn btn-link">already have account</a>
                         </div>
                     </div>
                 </div>

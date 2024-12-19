@@ -5,9 +5,25 @@
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    $validation = Validation::toValidate([
+        'email' => [
+            'required',
+            'unique',
+            'email',
+        ],
+        'password' => ['required']
+    ], $_POST);
+
+
+    if ($validation->notPass()) {
+
+        header('location: /login');
+        exit();
+    }
 
     $user = $database->query("
     select * from usuarios where
@@ -19,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user) {
 
-
         $dataPassword = $user->senha;
 
         if (! password_verify($password, $dataPassword)) {
@@ -30,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         $_SESSION['auth'] = $user;
-        header('location: /Book-Store/');
+        header('location: /');
         exit();
     }
 }
