@@ -1,6 +1,14 @@
 
 <?php
 
+function base_path($path)
+{
+
+
+    return __DIR__ . "/../" . $path;
+}
+
+
 // cria um contexto diferente quando é dentro de uma funcao, por isso preciso passar os dados de dentro da funcao para o require
 function view($view, $dados = [])
 {
@@ -10,7 +18,7 @@ function view($view, $dados = [])
         $$key = $value;
     }
 
-    require 'views/template/app.php';
+    require  base_path('views/template/app.php');
 }
 
 function dd($dump)
@@ -38,7 +46,7 @@ function abort($code)
 function flash()
 {
 
-    return new Flash;
+    return new Core\Flash;
 }
 
 function config()
@@ -48,4 +56,16 @@ function config()
 
 
     return $config;
+}
+
+function old($field)
+{
+
+    $post = $_POST;
+
+    if (isset($post[$field])) {
+        return $post[$field];
+    }
+
+    return '';
 }

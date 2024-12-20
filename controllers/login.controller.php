@@ -1,10 +1,11 @@
 <?php
 
-
+use Core\Database;
+use Core\Validation;
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    $database = new Database($config);
 
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($validation->notPass()) {
 
-        header('location: /login');
+        view('login');
         exit();
     }
 
@@ -33,20 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ])->fetch();
 
 
-    if ($user) {
-
-        $dataPassword = $user->senha;
-
-        if (! password_verify($password, $dataPassword)) {
-            flash()->push('validation', ['Usuário ou senha estão incorretos.']);
-            header('location: /login');
-            exit();
-        }
-
+    if ($user && ! password_verify($password, $dataPassword)) {
 
         $_SESSION['auth'] = $user;
         header('location: /');
         exit();
+    } else {
+        flash()->push('validation', ['email' => ['Usuário ou senha estão incorretos.']]);
     }
 }
 

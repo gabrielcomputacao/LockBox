@@ -1,7 +1,11 @@
 <?php
 
+namespace Core;
 
-class DB
+use PDO;
+
+
+class Database
 {
 
     private $db;
@@ -69,27 +73,9 @@ class DB
 
 
 
-            return array_map(fn($item) => Livro::make($item), $items);
+            // return array_map(fn($item) => Livro::make($item), $items);
         } catch (\Throwable $th) {
             echo "conexão NÃO deu certo";
         }
     }
-
-    // nao esta usando esse
-    public function livro($id = null)
-    {
-
-        $prepare = $this->db->prepare("SELECT * from livros where id = :id");
-
-        $prepare->bindValue(":id", "$id");
-
-        $prepare->setFetchMode(PDO::FETCH_CLASS, Livro::class);
-        $prepare->execute();
-
-
-        return  $prepare->fetch();
-    }
 }
-
-
-$database = new DB($config);

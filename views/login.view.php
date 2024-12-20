@@ -17,6 +17,7 @@
             <form action="/login" method="post">
 
                 <?php $validationsLogin = flash()->get('validation') ?>
+                <?php $post = flash()->get('post') ?>
 
                 <div class="card">
                     <div class="card-body">
@@ -26,9 +27,12 @@
                         <label class="form-control ">
                             <div class="label">
                                 <span class="label-text text-black">Email</span>
-
                             </div>
-                            <input name="email" type="text" placeholder="" class="input input-bordered w-full max-w-xs bg-white" />
+                            <input name="email" type="text"
+
+                                value="<?= old('email') ?>"
+
+                                placeholder="" class="input input-bordered w-full max-w-xs bg-white" />
                             <?php if (isset($validationsLogin['email'])): ?>
                                 <div class="label text-xs text-error">
                                     <?= $validationsLogin['email'][0] ?>

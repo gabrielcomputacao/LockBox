@@ -1,10 +1,11 @@
 <?php
 
-
-
-
+use Core\Database;
+use Core\Validation;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $database = new Database($config);
 
     $validation = Validation::toValidate([
         'name' => ['required'],
@@ -19,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($validation->notPass()) {
 
-        header('location: /Book-Store/login');
+        header('location: /register');
         exit();
     }
 

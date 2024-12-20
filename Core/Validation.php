@@ -1,5 +1,8 @@
 <?php
 
+
+namespace Core;
+
 class Validation
 {
 
@@ -83,7 +86,7 @@ class Validation
             return;
         }
 
-        $db = new DB(config());
+        $db = new Database(config());
 
         $result = $db->query(
             "select * from $table where email = :value",

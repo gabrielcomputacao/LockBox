@@ -2,7 +2,7 @@
 
 $config = [
     'host' => '127.0.0.1',
-    'dbname' => 'storybook',
+    'dbname' => 'lockbox',
     'username' => 'root',
     'password' => '',
 ];
