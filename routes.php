@@ -1,6 +1,18 @@
 <?php
 
-// O php processa os dados de cima para baixa e vai passando as variaveis para baixo
+use App\Controllers\IndexController;
+use App\Controllers\LoginController;
+use Core\Routes;
+
+(new Routes())
+    ->get('/', IndexController::class)
+    ->get('/login', [LoginController::class, 'index'])
+    ->post('/login', [LoginController::class, 'login'])
+    ->run();
+
+exit();
+
+
 
 $controller = 'index';
 
@@ -11,8 +23,6 @@ $queryParams = [];
 if (isset($urlParts['query'])) {
     parse_str($urlParts['query'], $queryParams);
 }
-
-
 
 
 if (
