@@ -69,3 +69,8 @@ function old($field)
 
     return '';
 }
+
+function redirect($uri)
+{
+    return header('location:' . $uri);
+}

@@ -2,11 +2,13 @@
 
 namespace App\Controllers;
 
-class IndexController
+class LogoutController
 {
 
     public function __invoke()
     {
-        return view('index');
+        session_destroy();
+
+        redirect('login');
     }
 }

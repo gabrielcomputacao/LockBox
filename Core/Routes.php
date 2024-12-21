@@ -17,16 +17,13 @@ class Routes
                 'class' => $controller,
                 'method' => '__invoke'
             ];
-        }
-        if (is_array($controller)) {
+        } else if (is_array($controller)) {
 
             $data =  [
                 'class' => $controller[0],
                 'method' => $controller[1]
             ];
         }
-
-
 
         $this->routes[$httpMethod][$uri] = $data;
     }
