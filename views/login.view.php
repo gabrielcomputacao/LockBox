@@ -17,6 +17,7 @@
             <form action="/login" method="post">
 
                 <?php $validationsLogin = flash()->get('validation') ?>
+                <?php $validationsMessage = flash()->get('message') ?>
                 <?php $post = flash()->get('post') ?>
 
                 <div class="card">
@@ -24,6 +25,7 @@
                         <div class="card-title">
                             Faça seu Login
                         </div>
+
                         <label class="form-control ">
                             <div class="label">
                                 <span class="label-text text-black">Email</span>

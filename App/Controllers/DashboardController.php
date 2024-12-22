@@ -7,6 +7,11 @@ class DashboardController
 
     public function __invoke()
     {
-        echo 'dashboard';
+
+        if (! $_SESSION['auth']) {
+            return redirect('login');
+        }
+
+        echo "estou logado" .  $_SESSION['auth']->nome;
     }
 }

@@ -14,5 +14,5 @@ use Core\Routes;
     ->get('/logout', LogoutController::class)
     ->get('/register', [RegisterController::class, 'index'])
     ->post('/login', [LoginController::class, 'login'])
-    ->post('/register', [RegisterController::class, 'login'])
+    ->post('/register', [RegisterController::class, 'register'])
     ->run();
