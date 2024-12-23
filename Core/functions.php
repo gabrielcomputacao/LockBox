@@ -10,7 +10,7 @@ function base_path($path)
 
 
 // cria um contexto diferente quando é dentro de uma funcao, por isso preciso passar os dados de dentro da funcao para o require
-function view($view, $dados = [])
+function view($view, $dados = [], $template = 'app')
 {
 
     foreach ($dados as $key => $value) {
@@ -18,7 +18,7 @@ function view($view, $dados = [])
         $$key = $value;
     }
 
-    require  base_path('views/template/app.php');
+    require  base_path("views/template/$template.php");
 }
 
 function dd($dump)

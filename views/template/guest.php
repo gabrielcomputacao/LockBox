@@ -13,24 +13,7 @@
 
 <body>
 
-    <div class="mx-auto max-w-screen-lg h-screen flex flex-col">
-
-        <?php require base_path('views/partials/_nav.view.php'); ?>
-
-        <?php require base_path('views/partials/_search.view.php'); ?>
-
-
-
-        <div class="h-svh flex py-6 flex-grow">
-            <?php require base_path("views/{$view}.view.php");  ?>
-        </div>
-
-
-    </div>
-
-
-
-
+    <?php require "../views/{$view}.view.php";  ?>
 
 </body>
 

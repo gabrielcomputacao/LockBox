@@ -10,7 +10,7 @@ class RegisterController
 
     public function index()
     {
-        return view('register');
+        return view('register', [], 'guest');
     }
 
     public function register()
@@ -28,7 +28,7 @@ class RegisterController
 
         if ($validation->notPass()) {
 
-            return view('register');
+            return view('register', [], 'guest');
         }
 
         $database = new Database(config());
