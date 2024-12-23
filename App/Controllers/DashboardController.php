@@ -12,6 +12,6 @@ class DashboardController
             return redirect('login');
         }
 
-        echo "estou logado" .  $_SESSION['auth']->nome;
+        return view('dashboard', ['user' => $_SESSION['auth']]);
     }
 }
