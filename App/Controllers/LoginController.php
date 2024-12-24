@@ -52,7 +52,7 @@ class LoginController
 
             flash()->push('message', 'Seja bem bindo' . $user->senha . '!');
 
-            return header('location: /dashboard');
+            return header('location: /notas');
         }
     }
 }
