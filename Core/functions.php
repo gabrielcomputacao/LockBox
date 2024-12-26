@@ -1,6 +1,9 @@
 
 <?php
 
+use App\Controllers\Notas\IndexController;
+use App\Models\Nota;
+
 function base_path($path)
 {
 
@@ -73,4 +76,28 @@ function old($field)
 function redirect($uri)
 {
     return header('location:' . $uri);
+}
+
+
+function getResultsRequestUri($arrayUri)
+{
+
+    $queryUri = explode('=', $arrayUri['query']);
+
+    if ($queryUri[0] == 'search') {
+
+        $notas = Nota::all($queryUri[1]);
+
+        if ($notas) {
+            return   ['notas' => $notas, 'selectedNote' => $notas[0]];
+        } else {
+            return view('notas/not_found', ['notas' => $notas]);
+        }
+    } else {
+
+        $notas = Nota::all();
+
+
+        return ['notas' => $notas, 'selectedNote' => IndexController::getSelectedNote($notas, $queryUri)];
+    }
 }
