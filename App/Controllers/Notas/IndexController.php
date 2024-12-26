@@ -10,16 +10,35 @@ class IndexController
     public function __invoke()
     {
 
-        $notas = Nota::all();
 
-        $uri_notas = explode('=', $_SERVER['REQUEST_URI']);
 
-        if (isset($uri_notas[1])) {
+        $arrayUri = parse_url($_SERVER['REQUEST_URI']);
 
-            $uniqueNote = array_filter($notas, fn($note) =>  $note->id == $uri_notas[1]);
+        if (isset($arrayUri['query'])) {
 
-            $selectedNote = array_pop($uniqueNote);
+            $queryUri = explode('=', $arrayUri['query']);
+
+            if ($queryUri[0] == 'search') {
+
+                $notas = Nota::all($queryUri[1]);
+
+                if ($notas) {
+                    $selectedNote =   $notas[0];
+                } else {
+                    return view('notas/not_found', ['notas' => $notas]);
+                }
+            } else {
+
+                $notas = Nota::all();
+
+                $uniqueNote = array_filter($notas, fn($note) =>  $note->id == $queryUri[1]);
+
+                $selectedNote = array_pop($uniqueNote);
+            }
         } else {
+
+            $notas = Nota::all();
+
             $selectedNote = $notas[0];
         }
 

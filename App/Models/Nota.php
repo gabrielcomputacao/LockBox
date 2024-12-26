@@ -16,15 +16,15 @@ class Nota
     public $data_update;
 
 
-    public static function all()
+    public static function all($filter = null)
     {
 
         $database = new Database(config());
 
         return  $database->query(
-            "select * from notas where usuario_id = :usuario_id",
+            ("select * from notas where usuario_id = :usuario_id" . ($filter ? " and titulo like :filter" : null)),
             self::class,
-            ['usuario_id' => $_SESSION['auth']->id]
+            array_merge(['usuario_id' => $_SESSION['auth']->id], $filter ? ['filter' => "%$filter%"] : [])
         )->fetchAll();
     }
 }

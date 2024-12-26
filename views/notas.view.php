@@ -21,7 +21,7 @@
             <span class="label-text">Title</span>
 
         </div>
-        <input type="text" name="titulo" value="<?= $selectedNote->titulo ?>" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+        <input type="text" name="titulo" value="<?= $selectedNote->titulo ?? '' ?>" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
 
     </label>
 
@@ -31,7 +31,7 @@
 
         </div>
         <textarea class="textarea textarea-bordered h-24" placeholder="Bio">
-        <?= $selectedNote->nota ?>
+        <?= $selectedNote->nota ?? '' ?>
 
         </textarea>
 
