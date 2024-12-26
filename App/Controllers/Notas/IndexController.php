@@ -2,16 +2,28 @@
 
 namespace App\Controllers\Notas;
 
+use App\Models\Nota;
+
 class IndexController
 {
 
     public function __invoke()
     {
 
-        if (! $_SESSION['auth']) {
-            return redirect('login');
+        $notas = Nota::all();
+
+        $uri_notas = explode('=', $_SERVER['REQUEST_URI']);
+
+        if (isset($uri_notas[1])) {
+
+            $uniqueNote = array_filter($notas, fn($note) =>  $note->id == $uri_notas[1]);
+
+            $selectedNote = array_pop($uniqueNote);
+        } else {
+            $selectedNote = $notas[0];
         }
 
-        return view('notas', ['user' => $_SESSION['auth']]);
+
+        return view('notas', ['notas' => $notas, 'selectedNote' => $selectedNote]);
     }
 }
