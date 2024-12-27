@@ -23,7 +23,7 @@ class IndexController
         }
 
 
-        return view('notas', ['notas' => $getResultsRequest['notas'], 'selectedNote' => $getResultsRequest['selectedNote']]);
+        return view('notas/index', ['notas' => $getResultsRequest['notas'], 'selectedNote' => $getResultsRequest['selectedNote']]);
     }
 
     public static function getSelectedNote($notas, $queryUri)
