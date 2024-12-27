@@ -4,11 +4,15 @@
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
-            <li><a href="/see">
+            <li>
 
-                    Olho
+                <?php if (isset($_SESSION['mostrar'])): ?>
+                    <a href="/esconder">🔑</a>
+                <?php else : ?>
+                    <a href="/mostrar">👁️</a>
+                <?php endif; ?>
 
-                </a></li>
+            </li>
             <li>
                 <details>
                     <summary><?= $_SESSION['auth']->nome ?></summary>

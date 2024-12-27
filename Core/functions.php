@@ -101,3 +101,9 @@ function getResultsRequestUri($arrayUri)
         return ['notas' => $notas, 'selectedNote' => IndexController::getSelectedNote($notas, $queryUri)];
     }
 }
+
+function hideData($value)
+{
+
+    return  isset($_SESSION['mostrar']) ? $value : str_repeat('*', strlen($value));
+}

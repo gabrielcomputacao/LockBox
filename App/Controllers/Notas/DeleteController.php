@@ -11,8 +11,6 @@ class DeleteController
     public function __invoke()
     {
 
-
-
         $database = new Database(config());
 
 

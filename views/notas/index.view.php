@@ -27,7 +27,8 @@
                 <span class="label-text">Title</span>
 
             </div>
-            <input type="text" name="titulo" value="<?= $selectedNote->titulo ?? '' ?>" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+            <input type="text"
+                name="titulo" value="<?= $selectedNote->titulo ?? '' ?>" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
 
         </label>
 
@@ -35,7 +36,11 @@
             <div class="label">
                 <span class="label-text">Your Note</span>
             </div>
-            <textarea name="nota" class="textarea textarea-bordered h-24"><?= $selectedNote->nota ?? '' ?></textarea>
+            <textarea
+                <?php if (!isset($_SESSION['mostrar'])): ?>
+                disabled
+                <?php endif; ?>
+                name="nota" class="textarea textarea-bordered h-24"><?= hideData($selectedNote->nota) ?? '' ?></textarea>
         </label>
     </form>
 
