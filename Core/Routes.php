@@ -54,6 +54,13 @@ class Routes
         return $this;
     }
 
+    public function delete($uri, $controller, $middleware)
+    {
+        $this->addRoute($uri, $controller, 'DELETE', $middleware);
+
+        return $this;
+    }
+
     public function run()
     {
 
