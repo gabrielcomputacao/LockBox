@@ -10,6 +10,7 @@ class IndexController
     public function __invoke()
     {
 
+
         $arrayUri = parse_url($_SERVER['REQUEST_URI']);
 
         if (isset($arrayUri['query'])) {
