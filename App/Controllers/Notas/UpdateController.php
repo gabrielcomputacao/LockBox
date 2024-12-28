@@ -34,7 +34,7 @@ class UpdateController
             null,
             [
                 'titulo' => $_POST['titulo'],
-                'nota' => $_POST['nota'],
+                'nota' => secured_encrypt($_POST['nota']),
                 'id' => $_POST['id_selected']
             ]
         );

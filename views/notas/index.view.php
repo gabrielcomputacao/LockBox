@@ -40,7 +40,7 @@
                 <?php if (!isset($_SESSION['mostrar'])): ?>
                 disabled
                 <?php endif; ?>
-                name="nota" class="textarea textarea-bordered h-24"><?= hideData($selectedNote->nota) ?? '' ?></textarea>
+                name="nota" class="textarea textarea-bordered h-24"><?= hideData(secured_decrypt($selectedNote->nota)) ?? '' ?></textarea>
         </label>
     </form>
 

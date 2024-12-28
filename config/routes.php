@@ -27,11 +27,11 @@ use Core\Routes;
     ->get('/logout', LogoutController::class, AuthMiddleware::class)
     ->get('/notas', Notas\IndexController::class, AuthMiddleware::class)
     ->get('/notas/create', [CreateController::class, 'index'], AuthMiddleware::class)
-    ->get('/mostrar', [DisplayNotasController::class, 'mostrar'], AuthMiddleware::class)
+    ->get('/confirm', [DisplayNotasController::class, 'confirm'], AuthMiddleware::class)
     ->get('/esconder', [DisplayNotasController::class, 'esconder'], AuthMiddleware::class)
 
 
-
+    ->post('/mostrar', [DisplayNotasController::class, 'mostrar'], AuthMiddleware::class)
     ->post('/notas/create', [CreateController::class, 'store'], AuthMiddleware::class)
     ->put('/nota', UpdateController::class, AuthMiddleware::class)
     ->delete('/nota', DeleteController::class, AuthMiddleware::class)

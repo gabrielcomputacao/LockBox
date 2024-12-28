@@ -13,7 +13,7 @@
                 <?php if (isset($_SESSION['mostrar'])): ?>
                     <a href="/esconder<?= isset($resultId) ? "?id=$resultId" : '' ?>">🔑</a>
                 <?php else : ?>
-                    <a href="/mostrar<?= isset($resultId) ? "?id=$resultId" : '' ?>">👁️</a>
+                    <a href="/confirm<?= isset($resultId) ? "?id=$resultId" : '' ?>">👁️</a>
                 <?php endif; ?>
 
             </li>
