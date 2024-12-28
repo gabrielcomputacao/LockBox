@@ -10,6 +10,14 @@ class DisplayNotasController
 
         $_SESSION['mostrar'] = true;
 
+
+        $resultId = getIdUrl();
+
+        if (isset($resultId)) {
+
+            return redirect("/notas?id=$resultId");
+        }
+
         return redirect('/notas');
     }
 
@@ -18,6 +26,14 @@ class DisplayNotasController
     {
 
         unset($_SESSION['mostrar']);
+
+        $resultId = getIdUrl();
+
+        if (isset($resultId)) {
+
+            return redirect("/notas?id=$resultId");
+        }
+
         return redirect('/notas');
     }
 }

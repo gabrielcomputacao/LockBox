@@ -39,7 +39,7 @@ class CreateController
             [
                 'usuario_id' => $_SESSION['auth']->id,
                 'titulo' => $_POST['titulo'],
-                'nota' => $_POST['nota'],
+                'nota' =>  secured_encrypt($_POST['nota']),
                 'data_criacao' => date('Y-m-d H:i:s'),
                 'data_update' => date('Y-m-d H:i:s')
             ]

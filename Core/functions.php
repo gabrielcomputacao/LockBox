@@ -157,3 +157,18 @@ function secured_decrypt($input)
 
     return false;
 }
+
+
+function getIdUrl()
+{
+
+    $partsUrl = parse_url($_SERVER['REQUEST_URI']);
+
+    $queryUrl =  isset($partsUrl['query']) ? explode('=', $partsUrl['query']) : null;
+
+    if ($queryUrl && $queryUrl[0] == 'id') {
+        return $queryUrl[1];
+    }
+
+    return null;
+}

@@ -6,10 +6,14 @@
         <ul class="menu menu-horizontal px-1">
             <li>
 
+                <?php $resultId = getIdUrl() ?>
+
+
+
                 <?php if (isset($_SESSION['mostrar'])): ?>
-                    <a href="/esconder">🔑</a>
+                    <a href="/esconder<?= isset($resultId) ? "?id=$resultId" : '' ?>">🔑</a>
                 <?php else : ?>
-                    <a href="/mostrar">👁️</a>
+                    <a href="/mostrar<?= isset($resultId) ? "?id=$resultId" : '' ?>">👁️</a>
                 <?php endif; ?>
 
             </li>
