@@ -35,11 +35,11 @@
                                 value="<?= old('email') ?>"
 
                                 placeholder="" class="input input-bordered w-full max-w-xs bg-white" />
-                            <?php if (isset($validationsLogin['email'])): ?>
+                            <?php if (isset($validationsLogin['email'])) { ?>
                                 <div class="label text-xs text-error">
                                     <?= $validationsLogin['email'][0] ?>
                                 </div>
-                            <?php endif; ?>
+                            <?php } ?>
                         </label>
                         <label class="form-control ">
                             <div class="label">
@@ -47,11 +47,11 @@
 
                             </div>
                             <input name="password" type="password" class="input input-bordered w-full max-w-xs bg-white" />
-                            <?php if (isset($validationsLogin['password'])): ?>
+                            <?php if (isset($validationsLogin['password'])) { ?>
                                 <div class="label text-xs text-error">
                                     <?= $validationsLogin['password'][0] ?>
                                 </div>
-                            <?php endif; ?>
+                            <?php } ?>
                         </label>
                         <div class="card-actions justify-end">
                             <button type="submit" class="btn btn-primary btn-block">Logar</button>

@@ -2,30 +2,26 @@
 
 namespace Core;
 
-use App\Middlewares\GuestMiddleware;
-
 class Routes
 {
-
     public $routes = [];
-
 
     public function addRoute($uri, $controller, $httpMethod, $middleware = null)
     {
 
         if (is_string($controller)) {
 
-            $data =  [
+            $data = [
                 'class' => $controller,
                 'method' => '__invoke',
-                'middleware' => $middleware
+                'middleware' => $middleware,
             ];
-        } else if (is_array($controller)) {
+        } elseif (is_array($controller)) {
 
-            $data =  [
+            $data = [
                 'class' => $controller[0],
                 'method' => $controller[1],
-                'middleware' => $middleware
+                'middleware' => $middleware,
             ];
         }
 
@@ -68,13 +64,12 @@ class Routes
 
         $httpMethod = isset($_POST['__method']) ? $_POST['__method'] : $_SERVER['REQUEST_METHOD'];
 
-        if (!isset($this->routes[$httpMethod])) {
+        if (! isset($this->routes[$httpMethod][$uri])) {
 
             abort(404);
         }
 
         $routeInfo = $this->routes[$httpMethod][$uri];
-
 
         $class = $routeInfo['class'];
         $method = $routeInfo['method'];
@@ -86,8 +81,6 @@ class Routes
 
             $m->handle();
         }
-
-
 
         $classDinamic = new $class;
 

@@ -11,11 +11,11 @@
                 <span class="label-text text-left">Password</span>
             </div>
             <input name="password" type="text" class="input input-bordered w-full max-w-xs" />
-            <?php if (isset($validationsPassword['password'])): ?>
+            <?php if (isset($validationsPassword['password'])) { ?>
                 <div class="label text-xs text-error">
                     <?= $validationsPassword['password'][0] ?>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
         </label>
 
 

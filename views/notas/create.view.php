@@ -13,11 +13,11 @@
 
             </div>
             <input name="titulo" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-            <?php if (isset($validationsCreate['titulo'])): ?>
+            <?php if (isset($validationsCreate['titulo'])) { ?>
                 <div class="label text-xs text-error">
                     <?= $validationsCreate['titulo'][0] ?>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
         </label>
 
         <label class="form-control">
@@ -26,11 +26,11 @@
 
             </div>
             <textarea name="nota" class="textarea textarea-bordered h-24" placeholder="Bio"></textarea>
-            <?php if (isset($validationsCreate['nota'])): ?>
+            <?php if (isset($validationsCreate['nota'])) { ?>
                 <div class="label text-xs text-error">
                     <?= $validationsCreate['nota'][0] ?>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
 
         </label>
 

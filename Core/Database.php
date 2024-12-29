@@ -4,15 +4,13 @@ namespace Core;
 
 use PDO;
 
-
 class Database
 {
-
     private $db;
 
     public function __construct($config)
     {
-        $this->db = new PDO("mysql:host=" . $config['host'] . ";dbname=" . $config['dbname'] . ";charset=utf8", $config['username'], $config['password']);
+        $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['dbname'].';charset=utf8', $config['username'], $config['password']);
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -38,12 +36,11 @@ class Database
 
         try {
 
-
             $prepare = '';
 
-            if (!isset($pesquisa)) {
+            if (! isset($pesquisa)) {
 
-                $prepare = $this->db->prepare("select * from livros");
+                $prepare = $this->db->prepare('select * from livros');
 
                 $prepare->execute();
             } else {
@@ -56,26 +53,22 @@ class Database
 
                 // metodo para preparar pesquisas para o banco de dados
 
-                $prepare = $this->db->prepare("select * from livros
+                $prepare = $this->db->prepare('select * from livros
                 where
                 titulo like :pesquisa
                 or descricao like :pesquisa
                 or autor like :pesquisa
-            ");
+            ');
                 $prepare->bindValue(':pesquisa', "%$pesquisa%");
 
                 $prepare->execute();
             }
 
-
-
-            $items =  $prepare->fetchAll();
-
-
+            $items = $prepare->fetchAll();
 
             // return array_map(fn($item) => Livro::make($item), $items);
         } catch (\Throwable $th) {
-            echo "conexão NÃO deu certo";
+            echo 'conexão NÃO deu certo';
         }
     }
 }

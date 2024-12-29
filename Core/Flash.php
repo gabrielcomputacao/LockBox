@@ -4,7 +4,6 @@ namespace Core;
 
 class Flash
 {
-
     public function push($key, $value)
     {
 
@@ -14,7 +13,7 @@ class Flash
     public function get($key)
     {
 
-        if (!isset($_SESSION["flash_$key"])) {
+        if (! isset($_SESSION["flash_$key"])) {
             return false;
         }
 

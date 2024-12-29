@@ -10,11 +10,11 @@
 
 
 
-                <?php if (isset($_SESSION['mostrar'])): ?>
+                <?php if (isset($_SESSION['mostrar'])) { ?>
                     <a href="/esconder<?= isset($resultId) ? "?id=$resultId" : '' ?>">🔑</a>
-                <?php else : ?>
+                <?php } else { ?>
                     <a href="/confirm<?= isset($resultId) ? "?id=$resultId" : '' ?>">👁️</a>
-                <?php endif; ?>
+                <?php } ?>
 
             </li>
             <li>

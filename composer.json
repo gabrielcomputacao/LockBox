@@ -1,0 +1,21 @@
+{
+    "name": "gabri/lockbox",
+    "authors": [
+        {
+            "name": "Gabriel",
+            "email": "gabrielcomputacao@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "App\\": "App/"
+        },
+        "files": [
+            "./Core/functions.php"
+        ]
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18"
+    }
+}

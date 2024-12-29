@@ -2,13 +2,12 @@
 
 namespace App\Controllers;
 
-use Core\Validation;
-use Core\Database;
 use App\Models\User;
+use Core\Database;
+use Core\Validation;
 
 class LoginController
 {
-
     public function index()
     {
         return view('login', [], 'guest');
@@ -25,9 +24,8 @@ class LoginController
                 'required',
                 'email',
             ],
-            'password' => ['required']
+            'password' => ['required'],
         ], $_POST);
-
 
         if ($validation->notPass()) {
             return view('login', [], 'guest');
@@ -35,22 +33,23 @@ class LoginController
 
         $database = new Database(config());
 
-        $user = $database->query("
+        $user = $database->query('
         select * from usuarios where
         email = :email
-        ", User::class, [
+        ', User::class, [
             'email' => $email,
         ])->fetch();
 
-        if (!($user && ! password_verify($password, $user->senha))) {
+        if (! ($user && ! password_verify($password, $user->senha))) {
 
             flash()->push('validation', ['email' => ['Usuário ou senha estão incorretos.']]);
+
             return view('login', [], 'guest');
         } else {
 
             $_SESSION['auth'] = $user;
 
-            flash()->push('message', 'Seja bem bindo' . $user->senha . '!');
+            flash()->push('message', 'Seja bem bindo'.$user->senha.'!');
 
             return header('location: /notas');
         }

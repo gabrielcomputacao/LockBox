@@ -6,7 +6,6 @@ use Core\Validation;
 
 class DisplayNotasController
 {
-
     public function mostrar()
     {
 
@@ -15,20 +14,19 @@ class DisplayNotasController
         $validation = Validation::toValidate([
             'password' => [
                 'required',
-            ]
+            ],
         ], $_POST);
-
 
         if ($validation->notPass()) {
             return view('notas/confirm');
         }
 
-        if (!password_verify($_POST['password'], $_SESSION['auth']->senha)) {
+        if (! password_verify($_POST['password'], $_SESSION['auth']->senha)) {
 
             flash()->push('validation', ['password' => ['Senha estão incorretos.']]);
+
             return view('notas/confirm');
         }
-
 
         $resultId = getIdUrl();
 
@@ -39,7 +37,6 @@ class DisplayNotasController
 
         return redirect('/notas');
     }
-
 
     public function esconder()
     {

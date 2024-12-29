@@ -7,7 +7,6 @@ use Core\Validation;
 
 class UpdateController
 {
-
     public function __invoke()
     {
 
@@ -16,30 +15,25 @@ class UpdateController
                 'required',
             ],
             'nota' => ['required'],
-            'id_selected' => ['required']
+            'id_selected' => ['required'],
         ], $_POST);
 
-
         if ($validation->notPass()) {
-            return redirect('/notas?id=' . $_POST['id_selected']);
+            return redirect('/notas?id='.$_POST['id_selected']);
         }
-
-
 
         $database = new Database(config());
 
-
         $database->query(
-            "update notas set titulo = :titulo, nota = :nota where id = :id",
+            'update notas set titulo = :titulo, nota = :nota where id = :id',
             null,
             [
                 'titulo' => $_POST['titulo'],
                 'nota' => secured_encrypt($_POST['nota']),
-                'id' => $_POST['id_selected']
+                'id' => $_POST['id_selected'],
             ]
         );
 
-
-        redirect("/notas");
+        redirect('/notas');
     }
 }

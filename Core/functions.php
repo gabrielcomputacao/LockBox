@@ -7,10 +7,8 @@ use App\Models\Nota;
 function base_path($path)
 {
 
-
-    return __DIR__ . "/../" . $path;
+    return __DIR__.'/../'.$path;
 }
-
 
 // cria um contexto diferente quando é dentro de uma funcao, por isso preciso passar os dados de dentro da funcao para o require
 function view($view, $dados = [], $template = 'app')
@@ -21,7 +19,7 @@ function view($view, $dados = [], $template = 'app')
         $$key = $value;
     }
 
-    require  base_path("views/template/$template.php");
+    require base_path("views/template/$template.php");
 }
 
 function dd($dump)
@@ -33,7 +31,7 @@ function dd($dump)
 
     echo '<pre/>';
 
-    die();
+    exit();
 }
 
 function abort($code)
@@ -43,7 +41,7 @@ function abort($code)
 
     view(404);
 
-    die();
+    exit();
 }
 
 function flash()
@@ -56,7 +54,6 @@ function config()
 {
 
     require 'credentials.php';
-
 
     return $config;
 }
@@ -85,9 +82,8 @@ function old($field)
 
 function redirect($uri)
 {
-    return header('location:' . $uri);
+    return header('location:'.$uri);
 }
-
 
 function getResultsRequestUri($arrayUri)
 {
@@ -99,14 +95,13 @@ function getResultsRequestUri($arrayUri)
         $notas = Nota::all($queryUri[1]);
 
         if ($notas) {
-            return   ['notas' => $notas, 'selectedNote' => $notas[0]];
+            return ['notas' => $notas, 'selectedNote' => $notas[0]];
         } else {
             return view('notas/not_found', ['notas' => $notas]);
         }
     } else {
 
         $notas = Nota::all();
-
 
         return ['notas' => $notas, 'selectedNote' => IndexController::getSelectedNote($notas, $queryUri)];
     }
@@ -115,7 +110,7 @@ function getResultsRequestUri($arrayUri)
 function hideData($value)
 {
 
-    return  isset($_SESSION['mostrar']) ? $value : str_repeat('*', strlen($value));
+    return isset($_SESSION['mostrar']) ? $value : str_repeat('*', strlen($value));
 }
 
 function secured_encrypt($data)
@@ -123,17 +118,17 @@ function secured_encrypt($data)
     $first_key = base64_decode(configSecurity('security.first_key'));
     $second_key = base64_decode(configSecurity('security.second_key'));
 
-    $method = "aes-256-cbc";
+    $method = 'aes-256-cbc';
     $iv_length = openssl_cipher_iv_length($method);
     $iv = openssl_random_pseudo_bytes($iv_length);
 
     $first_encrypted = openssl_encrypt($data, $method, $first_key, OPENSSL_RAW_DATA, $iv);
-    $second_encrypted = hash_hmac('sha3-512', $first_encrypted, $second_key, TRUE);
+    $second_encrypted = hash_hmac('sha3-512', $first_encrypted, $second_key, true);
 
-    $output = base64_encode($iv . $second_encrypted . $first_encrypted);
+    $output = base64_encode($iv.$second_encrypted.$first_encrypted);
+
     return $output;
 }
-
 
 function secured_decrypt($input)
 {
@@ -141,7 +136,7 @@ function secured_decrypt($input)
     $second_key = base64_decode(configSecurity('security.second_key'));
     $mix = base64_decode($input);
 
-    $method = "aes-256-cbc";
+    $method = 'aes-256-cbc';
     $iv_length = openssl_cipher_iv_length($method);
 
     $iv = substr($mix, 0, $iv_length);
@@ -149,7 +144,7 @@ function secured_decrypt($input)
     $first_encrypted = substr($mix, $iv_length + 64);
 
     $data = openssl_decrypt($first_encrypted, $method, $first_key, OPENSSL_RAW_DATA, $iv);
-    $second_encrypted_new = hash_hmac('sha3-512', $first_encrypted, $second_key, TRUE);
+    $second_encrypted_new = hash_hmac('sha3-512', $first_encrypted, $second_key, true);
 
     if (hash_equals($second_encrypted, $second_encrypted_new)) {
         return $data;
@@ -158,17 +153,24 @@ function secured_decrypt($input)
     return false;
 }
 
-
 function getIdUrl()
 {
 
     $partsUrl = parse_url($_SERVER['REQUEST_URI']);
 
-    $queryUrl =  isset($partsUrl['query']) ? explode('=', $partsUrl['query']) : null;
+    $queryUrl = isset($partsUrl['query']) ? explode('=', $partsUrl['query']) : null;
 
     if ($queryUrl && $queryUrl[0] == 'id') {
         return $queryUrl[1];
     }
 
     return null;
+}
+
+function env($key)
+{
+
+    $env = parse_ini_file(base_path('.env'));
+
+    return $env[$key];
 }

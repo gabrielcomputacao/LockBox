@@ -2,12 +2,11 @@
 
 namespace App\Controllers;
 
-use Core\Validation;
 use Core\Database;
+use Core\Validation;
 
 class RegisterController
 {
-
     public function index()
     {
         return view('register', [], 'guest');
@@ -23,7 +22,7 @@ class RegisterController
                 'email',
                 'confirmed',
             ],
-            'password' => ['required', 'min', 'strong']
+            'password' => ['required', 'min', 'strong'],
         ], $_POST);
 
         if ($validation->notPass()) {
@@ -43,8 +42,8 @@ class RegisterController
             ]
         );
 
-
         flash()->push('message', 'Cadastrado com sucesso!');
-        return redirect("login");
+
+        return redirect('login');
     }
 }

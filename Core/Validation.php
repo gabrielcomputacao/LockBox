@@ -1,11 +1,9 @@
 <?php
 
-
 namespace Core;
 
 class Validation
 {
-
     public $validations = [];
 
     public static function toValidate($rules, $data)
@@ -13,18 +11,17 @@ class Validation
 
         $validationFields = new self;
 
-
         foreach ($rules as $field => $rulesField) {
 
             foreach ($rulesField as $rule) {
 
                 if ($rule === 'confirmed') {
                     $validationFields->$rule($data[$field], $data['confirmemail']);
-                } else if ($rule == 'min') {
+                } elseif ($rule == 'min') {
                     $validationFields->$rule(6, $field, $data[$field]);
-                } else if ($rule == 'strong') {
+                } elseif ($rule == 'strong') {
                     $validationFields->$rule('*', $field, $data[$field]);
-                } else if ($rule == 'unique') {
+                } elseif ($rule == 'unique') {
                     $validationFields->$rule('usuarios', $field, $data[$field]);
                 } else {
 
@@ -49,7 +46,6 @@ class Validation
             $this->addError($field, "The $field is required");
         }
     }
-
 
     private function email($field, $value)
     {
@@ -92,22 +88,20 @@ class Validation
             "select * from $table where email = :value",
             null,
             [
-                "value" => $value,
+                'value' => $value,
             ]
         )->fetch();
 
         if ($result) {
-            $this->addError($field, "The email is used");
+            $this->addError($field, 'The email is used');
         }
     }
-
-
 
     public function notPass()
     {
 
         flash()->push('validation', $this->validations);
 
-        return sizeof($this->validations) > 0;
+        return count($this->validations) > 0;
     }
 }

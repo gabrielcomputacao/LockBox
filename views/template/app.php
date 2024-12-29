@@ -22,7 +22,7 @@
 
 
         <div class="h-svh flex py-6 flex-grow">
-            <?php require base_path("views/{$view}.view.php");  ?>
+            <?php require base_path("views/{$view}.view.php"); ?>
         </div>
 
 
